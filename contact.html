@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | North Star Bakery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a href="index.html" aria-label="North Star Bakery home">
+      <img src="media/bakery-logo.svg" alt="North Star Bakery logo with a loaf and wheat design" >
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact and Pre-Orders</a></li>
+      </ul>
+    </nav>
+  </div></header>
+  <main id="main-content" class="container">
+    <h1>Contact Us and Request a Pre-Order</h1>
+    <p>Have a question or want to plan a pickup? Send us the details below. This form is a sample HTML structure and does not send information until a form-processing service is connected.</p>
+    <section class="content-card">
+      <h2>Send Your Request</h2>
+      <form action="#" method="get" onsubmit="event.preventDefault(); document.getElementById('form-status').textContent='This is a demonstration form. No request has been sent.';">
+        <fieldset>
+          <legend>Your Contact Information</legend>
+          <p><label for="customer-name">Full name (required)</label><br>
+          <input type="text" id="customer-name" name="customer_name" autocomplete="name" required minlength="2"></p>
+          <p><label for="customer-email">Email address (required)</label><br>
+          <input type="email" id="customer-email" name="customer_email" autocomplete="email" required></p>
+        </fieldset>
+        <fieldset>
+          <legend>Request Details</legend>
+          <p><label for="request-type">What can we help with? (required)</label><br>
+          <select id="request-type" name="request_type" required>
+            <option value="">Choose a request type</option>
+            <option value="preorder">Pre-order</option>
+            <option value="question">General question</option>
+          </select></p>
+          <p><label for="pickup-date">Preferred pickup date</label><br>
+          <input type="date" id="pickup-date" name="pickup_date"></p>
+          <p><label for="item-details">Item details (required)</label><br>
+          <textarea id="item-details" name="item_details" rows="5" cols="40" required minlength="5" placeholder="Tell us which items you need and the quantity, or write your question."></textarea></p>
+          <p><label for="allergy-notes">Allergy notes (if applicable)</label><br>
+          <textarea id="allergy-notes" name="allergy_notes" rows="3" cols="40" placeholder="List ingredients you need us to know about, or write none."></textarea></p>
+        </fieldset>
+        <button type="submit">Submit Request</button>
+      <p id="form-status" role="status" aria-live="polite"></p>
+    </form>
+    </section>
+    <section class="content-card">
+      <h2>Visit North Star Bakery</h2>
+      <p><strong>Location:</strong> Our neighborhood storefront. Contact us for the current street address.</p>
+      <p><strong>Sample hours:</strong> Monday–Saturday, 7:00 a.m.–5:00 p.m.; Sunday, 8:00 a.m.–2:00 p.m.</p>
+      <p>Please confirm pickup availability before making a special trip.</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>&copy; 2026 North Star Bakery. Baked with care for our neighborhood.</p>
+    <p><a href="contact.html">Questions or pre-orders? Contact us.</a></p>
+  </footer>
+</body>
+</html>
