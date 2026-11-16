@@ -59,7 +59,40 @@
       <p><strong>Sample hours:</strong> Monday–Saturday, 7:00 a.m.–5:00 p.m.; Sunday, 8:00 a.m.–2:00 p.m.</p>
       <p>Please confirm pickup availability before making a special trip.</p>
     </section>
-  </main>
+ <section class="content-card">
+  <h2>Remember My Preference</h2>
+
+  <label for="saved-preference">
+    Preferred request type:
+  </label>
+
+  <select id="saved-preference">
+    <option value="">Choose an option</option>
+    <option value="preorder">Pre-order</option>
+    <option value="question">General question</option>
+  </select>
+
+  <p id="preference-status" role="status" aria-live="polite"></p>
+</section>
+
+<script>
+  const preference = document.getElementById('saved-preference');
+  const preferenceStatus = document.getElementById('preference-status');
+
+  const saved = localStorage.getItem('bakeryPreference');
+
+  if (saved) {
+    preference.value = saved;
+    preferenceStatus.textContent =
+      'Your saved preference has been restored.';
+  }
+
+  preference.addEventListener('change', function () {
+    localStorage.setItem('bakeryPreference', preference.value);
+    preferenceStatus.textContent =
+      'Your preference has been saved!';
+  });
+</script> </main>
   <footer class="site-footer">
     <p>&copy; 2026 North Star Bakery. Baked with care for our neighborhood.</p>
     <p><a href="contact.html">Questions or pre-orders? Contact us.</a></p>
