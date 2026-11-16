@@ -76,9 +76,91 @@
 </section>
 
 <script>
-  const preference = document.getElementById('saved-preference');
-  const preferenceStatus = document.getElementById('preference-status');
+const fields = {
+  name: document.getElementById('customer-name'),
+  email: document.getElementById('customer-email'),
+  type: document.getElementById('request-type'),
+  details: document.getElementById('item-details')
+};
+  
 
+const messages = {
+  name: 'Please enter your full name (at least 2 characters).',
+  email: 'Please enter a valid email address.',
+  type: 'Please select a request type.',
+  details: 'Please enter at least 5 characters.'
+};
+
+function showError(field, message) {
+  let error = document.getElementById(field.id + '-error');
+
+  if (!error) {
+    error = document.createElement('span');
+    error.id = field.id + '-error';
+    error.style.color = '#b00020';
+    error.style.display = 'block';
+    field.insertAdjacentElement('afterend', error);
+  }
+
+  error.textContent = message;
+  field.setAttribute('aria-invalid', message ? 'true' : 'false');
+}
+
+function validateForm(event) {
+  event.preventDefault();
+
+  let valid = true;
+
+  const nameValid = fields.name.value.trim().length >= 2;
+  const emailValid =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim());
+  const typeValid = fields.type.value !== '';
+  const detailsValid = fields.details.value.trim().length >= 5;
+
+  const checks = {
+    name: nameValid,
+    email: emailValid,
+    type: typeValid,
+    details: detailsValid
+  };
+
+  Object.keys(checks).forEach(function(key) {
+    if (!checks[key]) {
+      showError(fields[key], messages[key]);
+      valid = false;
+    } else {
+      showError(fields[key], '');
+    }
+  });
+
+  const status = document.getElementById('form-status');
+
+  if (valid) {
+    localStorage.setItem('bakeryCustomerName', fields.name.value.trim());
+    status.textContent =
+      'Your request has been validated successfully. This is a demo form; no request was sent.';
+  } else {
+    status.textContent = 'Please correct the highlighted fields.';
+  }
+}
+
+function restoreCustomerName() {
+  const savedName = localStorage.getItem('bakeryCustomerName');
+
+  if (savedName) {
+    fields.name.value = savedName;
+  }
+}
+
+const preference = document.getElementById('saved-preference');
+const preferenceStatus = document.getElementById('preference-status');
+
+function savePreference() {
+  localStorage.setItem('bakeryPreference', preference.value);
+  preferenceStatus.textContent = 'Your preference has been saved!';
+}
+
+function restorePreference() {
   const saved = localStorage.getItem('bakeryPreference');
 
   if (saved) {
@@ -86,13 +168,19 @@
     preferenceStatus.textContent =
       'Your saved preference has been restored.';
   }
+}
 
-  preference.addEventListener('change', function () {
-    localStorage.setItem('bakeryPreference', preference.value);
-    preferenceStatus.textContent =
-      'Your preference has been saved!';
-  });
-</script> </main>
+const form = fields.name.closest('form');
+
+form.noValidate = true;
+form.addEventListener('submit', validateForm);
+
+preference.addEventListener('change', savePreference);
+
+restorePreference();
+restoreCustomerName();
+</script>
+  </main>
   <footer class="site-footer">
     <p>&copy; 2026 North Star Bakery. Baked with care for our neighborhood.</p>
     <p><a href="contact.html">Questions or pre-orders? Contact us.</a></p>
